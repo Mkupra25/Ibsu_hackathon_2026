@@ -26,7 +26,7 @@ class Settings(BaseSettings):
 
     # === Google Gemini LLM ===
     google_api_key: str = ""
-    gemini_model: str = "gemini-2.5-flash"
+    gemini_model: str = "gemini-3.5-flash"
 
     # === უსაფრთხოება ===
     query_timeout_seconds: int = 10
