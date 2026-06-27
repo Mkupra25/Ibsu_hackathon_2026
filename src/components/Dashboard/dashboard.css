@@ -1,0 +1,21 @@
+.dashboard {
+  color: white;
+}
+
+.dashboard-title {
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.chart-card {
+  background: #111827;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.chart-title {
+  color: #cbd5e1;
+  margin-bottom: 10px;
+}

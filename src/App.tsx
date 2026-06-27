@@ -5,15 +5,17 @@ import Chat from "./components/Chat/chat";
 
 export default function App() {
   return (
-    <div className="app-layout">
-      <Sidebar />
+    <div className="layout">
+      <div className="sidebar">
+        <Sidebar />
+      </div>
 
-      <main className="main-content">
+      <div className="content">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/chat" element={<Chat />} />
         </Routes>
-      </main>
+      </div>
     </div>
   );
 }
