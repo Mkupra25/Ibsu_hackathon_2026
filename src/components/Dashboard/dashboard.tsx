@@ -1,20 +1,37 @@
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
 import { salesData } from "../../data/mockdata";
 
 export default function Dashboard() {
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Dashboard</h1>
+    <div className="dashboard">
+      <h1 className="dashboard-title">დეშბორდი</h1>
 
-      <div style={{ width: "100%", height: 300 }}>
-        <ResponsiveContainer>
-          <LineChart data={salesData}>
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Line type="monotone" dataKey="revenue" stroke="#4f46e5" />
-          </LineChart>
-        </ResponsiveContainer>
+      <div className="chart-card">
+        <h2 className="chart-title">შემოსავალი (Revenue)</h2>
+
+        <div className="chart-container">
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={salesData}>
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Line
+                type="monotone"
+                dataKey="revenue"
+                stroke="#4f46e5"
+                strokeWidth={2}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );

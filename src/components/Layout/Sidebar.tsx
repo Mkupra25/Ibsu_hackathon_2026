@@ -1,21 +1,33 @@
-import { LayoutDashboard, TrendingUp, Shield, Bot, Settings } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
-export default function Sidebar(): import("react").JSX.Element {
+export default function Sidebar() {
   return (
-    <div className="h-screen w-64 bg-zinc-950 border-r border-zinc-800 text-white p-4">
-      
-      <h1 className="text-xl font-bold mb-8">
-        AI BI Dashboard
-      </h1>
+    <aside className="sidebar">
+      <h1 className="text-xl font-bold mb-6">მენიუ</h1>
 
-      <nav className="space-y-4 text-sm">
+      <NavLink to="/" className="block p-2 rounded bg-gray-800 hover:bg-gray-700">
+        მთავარი
+      </NavLink>
 
-        <div className="flex items-center gap-3 hover:bg-zinc-900 p-2 rounded">
-          <LayoutDashboard size={18} />
-          Dashboard
-        </div>
-      </nav>
+      <div className="mt-6">
+        <p className="text-gray-400 text-sm mb-2">AI აგენტი</p>
+        <NavLink to="/chat" className="block p-2 rounded bg-gray-800 hover:bg-gray-700">
+          ჩათი
+        </NavLink>
+      </div>
 
-    </div>
+      <div className="mt-6">
+        <p className="text-gray-400 text-sm mb-2">ბაზა</p>
+        <NavLink to="/products" className="block p-2 rounded bg-gray-800 hover:bg-gray-700">
+          პროდუქტები
+        </NavLink>
+        <NavLink to="/customers" className="block p-2 rounded bg-gray-800 hover:bg-gray-700">
+          კლიენტები
+        </NavLink>
+        <NavLink to="/orders" className="block p-2 rounded bg-gray-800 hover:bg-gray-700">
+          შეკვეთები
+        </NavLink>
+      </div>
+    </aside>
   );
 }

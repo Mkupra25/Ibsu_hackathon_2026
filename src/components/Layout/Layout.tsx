@@ -1,13 +1,14 @@
+import { type ReactNode } from "react";
 import Sidebar from "./Sidebar";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex bg-zinc-950 text-white">
+    <div className="flex h-screen bg-black text-white">
       <Sidebar />
 
-      <div className="flex-1">
+      <main className="flex-1 p-6 overflow-auto">
         {children}
-      </div>
+      </main>
     </div>
   );
 }
