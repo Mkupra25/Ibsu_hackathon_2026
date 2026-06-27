@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # === PostgreSQL მონაცემთა ბაზა ===
+  db:
+    image: postgres:16-alpine
+    container_name: conversational_bi_db
+    environment:
+      POSTGRES_DB: conversational_bi
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./data/seed.sql:/docker-entrypoint-initdb.d/01_seed.sql  # ავტომატური seed
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # === FastAPI აპლიკაცია ===
+  app:
+    build: .
+    container_name: conversational_bi_app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/conversational_bi
+      - DATABASE_URL_SYNC=postgresql+psycopg2://postgres:postgres@db:5432/conversational_bi
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./app:/code/app
+      - ./prompts:/code/prompts
+
+volumes:
+  postgres_data:

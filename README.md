@@ -1,75 +1,53 @@
-# React + TypeScript + Vite
+# 🤖 სასაუბრო BI — AI ასისტენტი SQL მონაცემთა ბაზისთვის
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ქართულენოვანი AI ასისტენტი, რომელიც ბუნებრივ ენაზე დასმულ ბიზნეს-კითხვებს SQL მოთხოვნებად გარდაქმნის და მონაცემთა ბაზიდან პასუხს აბრუნებს.
 
-Currently, two official plugins are available:
+## 🚀 სწრაფი დაწყება (Backend)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### წინაპირობები
+- Python 3.12+
+- Docker Desktop (PostgreSQL-ისთვის)
+- Google Gemini API Key ([აქედან](https://aistudio.google.com/apikey))
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+### 1. გარემოს ცვლადების კონფიგურაცია
+```bash
+cp .env.example .env
+# .env ფაილში ჩაწერეთ თქვენი GOOGLE_API_KEY
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+### 2. PostgreSQL-ის გაშვება (Docker)
+```bash
+docker-compose up -d db
 ```
+
+### 3. Python გარემოს შექმნა
+```bash
+python -m venv venv
+venv\Scripts\activate        # Windows
+pip install -r requirements.txt
+```
+
+### 4. აპლიკაციის გაშვება
+```bash
+uvicorn app.main:app --reload --port 8000
+```
+
+## 🎨 Frontend (React + Vite)
+Frontend განთავსებულია იმავე რეპოზიტორიაში. გაშვებისთვის დაგჭირდებათ Node.js (v18+).
+
+### გაშვება:
+```bash
+npm install
+npm run dev
+```
+
+## 📊 API Endpoints
+
+| მეთოდი | URL | აღწერა |
+|---|---|---|
+| `GET` | `/api/health` | სისტემის სტატუსი |
+| `POST` | `/api/chat` | ბიზნეს-კითხვის დასმა |
+| `GET` | `/api/schema` | DB სტრუქტურა |
+
+---
+*GTU ტექნოლოგიური ჰაკათონი 2026*
